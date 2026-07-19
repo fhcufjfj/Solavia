@@ -75,8 +75,8 @@
             transition: transform 0.2s, background-color 0.2s;
             -webkit-tap-highlight-color: transparent;
             flex: 1 1 auto;
-            min-width: 110px;
-            max-width: 180px;
+            min-width: 100px;
+            max-width: 160px;
         }
         .btn-custom:active {
             transform: scale(0.95);
@@ -123,8 +123,7 @@
             font-size: 15px;
             color: #444;
         }
-        .info-card p:last-child {
-            margin-bottom: 0;
+        .info-card p.centered {
             font-weight: 600;
             color: #000;
             text-align: center;
@@ -175,39 +174,42 @@
         <div class="buttons-container">
             <button class="btn-custom" id="toggleInfoBtn">О компании</button>
             <button class="btn-custom" id="toggleFleetBtn">Наш флот</button>
-            <button class="btn-custom" id="ticketsBtn">Билеты</button>
+            <button class="btn-custom" id="toggleTicketsBtn">Билеты</button>
         </div>
 
+        <!-- Раздел: Информация -->
         <section class="hidden-section" id="infoSection">
             <h2 class="section-title">О компании SolAvia</h2>
             <div class="info-card">
-                <p>SolAvia — молодая и амбициозная авиакомпания, созданная с чистого листа ради одной главной цели: изменить ваше представление о комфорте в небе. Мы только начинаем свой путь, но уже сейчас вкладываем максимум усилий, заботы и тепла в подготовку каждого рейса.</p>
-                <p>Ваша безопасность, спокойствие и улыбка во время полета — это наш главный приоритет. Мы стремимся к тому, чтобы на борту наших лайнеров вы чувствовали себя уютно, как дома, а каждое путешествие приносило лишь приятные эмоции.</p>
-                <p>Искренне благодарим за проявленный интерес и с нетерпением будем ждать встречи с вами на наших рейсах!</p>
+                <p>SolAvia — молодая и амбициозная авиакомпания, созданная с чистого листа ради одной главной цели: изменить ваше представление о комфорте в небе. Мы только начинаем свой путь.</p>
+                <p class="centered">Добро пожаловать на борт!</p>
             </div>
         </section>
 
+        <!-- Раздел: Флот -->
         <section class="hidden-section" id="fleetSection">
             <h2 class="section-title">Воздушные суда SolAvia</h2>
-            
             <div class="plane-card">
                 <img src="plane1.jpg" alt="Boeing 737-800" class="plane-img">
-                <div class="plane-info">
-                    <p class="plane-name">Boeing 737-800</p>
-                </div>
+                <div class="plane-info"><p class="plane-name">Boeing 737-800</p></div>
             </div>
-
             <div class="plane-card">
                 <img src="plane2.jpg" alt="Airbus A320" class="plane-img">
-                <div class="plane-info">
-                    <p class="plane-name">Airbus A320</p>
-                </div>
+                <div class="plane-info"><p class="plane-name">Airbus A320</p></div>
+            </div>
+        </section>
+
+        <!-- Раздел: Билеты -->
+        <section class="hidden-section" id="ticketsSection">
+            <h2 class="section-title">Покупка билетов</h2>
+            <div class="info-card">
+                <p class="centered" style="color: #d9534f;">К сожалению, в данный момент билеты нет в продаже.</p>
             </div>
         </section>
     </main>
 
     <footer>
-        &copy; 2026 SolAvia. Все права защищены. Личный доступ.
+        &copy; 2026 SolAvia. Все права защищены.
     </footer>
 
     <script>
@@ -216,32 +218,28 @@
             const section = document.getElementById(sectionId);
 
             btn.addEventListener('click', () => {
+                // Закрываем другие секции, если хотим, чтобы открывалась только одна
+                document.querySelectorAll('.hidden-section').forEach(s => {
+                    if (s.id !== sectionId) {
+                        s.classList.remove('show');
+                        setTimeout(() => s.style.display = 'none', 500);
+                    }
+                });
+
                 if (section.classList.contains('show')) {
                     section.classList.remove('show');
-                    setTimeout(() => {
-                        if(!section.classList.contains('show')) {
-                            section.style.display = 'none';
-                        }
-                    }, 500);
+                    setTimeout(() => section.style.display = 'none', 500);
                 } else {
                     section.style.display = 'block';
-                    setTimeout(() => {
-                        section.classList.add('show');
-                    }, 10);
-                    setTimeout(() => {
-                        section.scrollIntoView({ behavior: 'smooth' });
-                    }, 200);
+                    setTimeout(() => section.classList.add('show'), 10);
+                    setTimeout(() => section.scrollIntoView({ behavior: 'smooth' }), 200);
                 }
             });
         }
 
-        // Обработчик для кнопки "Билеты"
-        document.getElementById('ticketsBtn').addEventListener('click', () => {
-            alert('Нет в продаже');
-        });
-
         setupToggle('toggleInfoBtn', 'infoSection');
         setupToggle('toggleFleetBtn', 'fleetSection');
+        setupToggle('toggleTicketsBtn', 'ticketsSection');
     </script>
 </body>
 </html>
