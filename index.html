@@ -6,105 +6,235 @@
     <title>SolAvia</title>
     <meta name="robots" content="noindex, nofollow">
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f6f9; color: #333; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-        header { background-color: #ffffff; width: 100%; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 15px 0; text-align: center; }
-        .logo-container { display: flex; flex-direction: column; align-items: center; gap: 5px; }
-        .logo-img { max-width: 150px; height: auto; }
-        h1 { margin: 5px 0 0 0; font-size: 28px; font-weight: 800; letter-spacing: 1px; color: #111; }
-        main { padding: 30px 20px; text-align: center; max-width: 600px; width: 100%; box-sizing: border-box; }
-        .buttons-container { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
-        .btn-custom { background-color: #000000; color: #ffffff; border: none; padding: 12px 18px; font-size: 14px; font-weight: bold; border-radius: 30px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: transform 0.2s; flex: 1 1 auto; min-width: 100px; max-width: 140px; }
-        .btn-custom:active { transform: scale(0.95); }
-        .hidden-section { display: none; margin-top: 40px; opacity: 0; transition: opacity 0.5s ease; }
-        .hidden-section.show { display: block; opacity: 1; }
-        .section-title { font-size: 22px; margin-bottom: 20px; position: relative; display: inline-block; }
-        .section-title::after { content: ''; position: absolute; bottom: -5px; left: 25%; width: 50%; height: 2px; background-color: #000; }
-        .info-card { background: #ffffff; border-radius: 12px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #eee; text-align: left; line-height: 1.7; }
-        .info-card p { margin: 0 0 15px 0; font-size: 15px; color: #444; }
-        .info-card p:last-child { margin-bottom: 0; font-weight: 600; color: #000; text-align: center; }
-        .plane-card { background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-bottom: 25px; border: 1px solid #eee; }
-        .plane-img { width: 100%; height: auto; display: block; }
-        .plane-info { padding: 15px; }
-        .plane-name { font-size: 18px; margin: 0 0 5px 0; font-weight: 600; }
-        footer { margin-top: auto; padding: 20px; font-size: 12px; color: #999; text-align: center; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #ffffff;
+            width: 100%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 15px 0;
+            text-align: center;
+        }
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        .logo-img {
+            max-width: 150px;
+            height: auto;
+        }
+        h1 {
+            margin: 5px 0 0 0;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #111;
+        }
+        main {
+            padding: 30px 20px;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .intro-text {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .buttons-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .btn-custom {
+            background-color: #000000;
+            color: #ffffff;
+            border: none;
+            padding: 15px 25px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            transition: transform 0.2s, background-color 0.2s;
+            -webkit-tap-highlight-color: transparent;
+            flex: 1;
+            min-width: 160px;
+            max-width: 220px;
+        }
+        .btn-custom:active {
+            transform: scale(0.95);
+            background-color: #222;
+        }
+        .hidden-section {
+            display: none;
+            margin-top: 40px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .hidden-section.show {
+            display: block;
+            opacity: 1;
+        }
+        .section-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 25%;
+            width: 50%;
+            height: 2px;
+            background-color: #000;
+        }
+        .info-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+            text-align: left;
+            line-height: 1.7;
+        }
+        .info-card p {
+            margin: 0 0 15px 0;
+            font-size: 15px;
+            color: #444;
+        }
+        .info-card p:last-child {
+            margin-bottom: 0;
+            font-weight: 600;
+            color: #000;
+            text-align: center;
+        }
+        .plane-card {
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            border: 1px solid #eee;
+        }
+        .plane-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .plane-info {
+            padding: 15px;
+        }
+        .plane-name {
+            font-size: 18px;
+            margin: 0 0 5px 0;
+            font-weight: 600;
+        }
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo-container">
+            <!-- Путь ведёт в созданную вами папку image -->
             <img src="image/logo.jpg" alt="SolAvia Logo" class="logo-img">
             <h1>SolAvia</h1>
         </div>
     </header>
 
     <main>
+        <p class="intro-text">Добро пожаловать на приватный информационный портал авиакомпании SolAvia. Ознакомьтесь с нашей философией и воздушным флотом.</p>
+        
         <div class="buttons-container">
             <button class="btn-custom" id="toggleInfoBtn">О компании</button>
             <button class="btn-custom" id="toggleFleetBtn">Наш флот</button>
-            <button class="btn-custom" id="toggleTicketsBtn">Билетов</button>
-            <button class="btn-custom" id="toggleRulesBtn">Правила</button>
         </div>
 
         <section class="hidden-section" id="infoSection">
             <h2 class="section-title">О компании SolAvia</h2>
             <div class="info-card">
-                <p>SolAvia — молодая и амбициозная авиакомпания, созданная с чистого листа ради одной главной цели: изменить ваше представление о комфорте в небе.</p>
-                <p>Искренне благодарим за проявленный интерес и будем ждать встречи на наших рейсах!</p>
+                <p>SolAvia — молодая и амбициозная авиакомпания, созданная с чистого листа ради одной главной цели: изменить ваше представление о комфорте в небе. Мы только начинаем свой путь, но уже сейчас вкладываем максимум усилия, заботы и тепла в подготовку каждого рейса.</p>
+                <p>Ваша безопасность, спокойствие и улыбка во время полета — это наш главный приоритет. Мы стремимся к тому, чтобы на борту наших лайнеров вы чувствовали себя уютно, как дома, а каждое путешествие приносило лишь приятные эмоции.</p>
+                <p>Искренне благодарим за проявленный интерес и с нетерпением будем ждать встречи с вами на наших рейсах!</p>
             </div>
         </section>
 
         <section class="hidden-section" id="fleetSection">
             <h2 class="section-title">Воздушные суда SolAvia</h2>
+            
             <div class="plane-card">
+                <!-- Путь ведёт в созданную вами папку image -->
                 <img src="image/plane1.jpg" alt="Boeing 737-800" class="plane-img">
-                <div class="plane-info"><p class="plane-name">Boeing 737-800</p></div>
+                <div class="plane-info">
+                    <p class="plane-name">Boeing 737-800</p>
+                </div>
             </div>
+
             <div class="plane-card">
+                <!-- Путь ведёт в созданную вами папку image -->
                 <img src="image/plane2.jpg" alt="Airbus A320" class="plane-img">
-                <div class="plane-info"><p class="plane-name">Airbus A320</p></div>
-            </div>
-        </section>
-
-        <section class="hidden-section" id="ticketsSection">
-            <h2 class="section-title">Билетов</h2>
-            <div class="info-card"><p style="text-align: center; color: #d9534f;">К сожалению, в данный момент билетов нет в продаже.</p></div>
-        </section>
-
-        <section class="hidden-section" id="rulesSection">
-            <h2 class="section-title">Правила игры</h2>
-            <div class="info-card">
-                <p>1. Безопасность превыше всего.</p>
-                <p>2. Пунктуальность — наш конёк.</p>
-                <p>3. Уважайте экипаж и соседей по борту.</p>
+                <div class="plane-info">
+                    <p class="plane-name">Airbus A320</p>
+                </div>
             </div>
         </section>
     </main>
 
-    <footer>&copy; 2026 SolAvia. Личный доступ.</footer>
+    <footer>
+        &copy; 2026 SolAvia. Все права защищены. Личный доступ.
+    </footer>
 
     <script>
         function setupToggle(buttonId, sectionId) {
             const btn = document.getElementById(buttonId);
             const section = document.getElementById(sectionId);
+
             btn.addEventListener('click', () => {
-                document.querySelectorAll('.hidden-section').forEach(s => {
-                    if (s.id !== sectionId) { s.classList.remove('show'); setTimeout(() => s.style.display = 'none', 500); }
-                });
-                if (section.style.display === 'block') {
+                if (section.classList.contains('show')) {
                     section.classList.remove('show');
-                    setTimeout(() => section.style.display = 'none', 500);
+                    setTimeout(() => {
+                        if(!section.classList.contains('show')) {
+                            section.style.display = 'none';
+                        }
+                    }, 500);
                 } else {
                     section.style.display = 'block';
-                    setTimeout(() => section.classList.add('show'), 10);
-                    setTimeout(() => section.scrollIntoView({ behavior: 'smooth' }), 200);
+                    setTimeout(() => {
+                        section.classList.add('show');
+                    }, 10);
+                    setTimeout(() => {
+                        section.scrollIntoView({ behavior: 'smooth' });
+                    }, 200);
                 }
             });
         }
+
         setupToggle('toggleInfoBtn', 'infoSection');
         setupToggle('toggleFleetBtn', 'fleetSection');
-        setupToggle('toggleTicketsBtn', 'ticketsSection');
-        setupToggle('toggleRulesBtn', 'rulesSection');
     </script>
 </body>
 </html>
