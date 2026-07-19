@@ -55,10 +55,9 @@
             margin-bottom: 30px;
         }
         
-        /* Кнопки в один ряд */
         .buttons-container {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             justify-content: center;
             flex-wrap: wrap;
             margin-bottom: 20px;
@@ -67,24 +66,23 @@
             background-color: #000000;
             color: #ffffff;
             border: none;
-            padding: 15px 25px;
-            font-size: 15px;
+            padding: 12px 20px;
+            font-size: 14px;
             font-weight: bold;
             border-radius: 30px;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
             transition: transform 0.2s, background-color 0.2s;
             -webkit-tap-highlight-color: transparent;
-            flex: 1;
-            min-width: 160px;
-            max-width: 220px;
+            flex: 1 1 auto;
+            min-width: 110px;
+            max-width: 180px;
         }
         .btn-custom:active {
             transform: scale(0.95);
             background-color: #222;
         }
 
-        /* Скрытые секции */
         .hidden-section {
             display: none;
             margin-top: 40px;
@@ -111,7 +109,6 @@
             background-color: #000;
         }
 
-        /* Текстовая карточка компании */
         .info-card {
             background: #ffffff;
             border-radius: 12px;
@@ -133,7 +130,6 @@
             text-align: center;
         }
 
-        /* Карточки самолетов */
         .plane-card {
             background: #ffffff;
             border-radius: 12px;
@@ -176,13 +172,12 @@
     <main>
         <p class="intro-text">Добро пожаловать на приватный информационный портал авиакомпании SolAvia. Ознакомьтесь с нашей философией и воздушным флотом.</p>
         
-        <!-- Две кнопки -->
         <div class="buttons-container">
             <button class="btn-custom" id="toggleInfoBtn">О компании</button>
             <button class="btn-custom" id="toggleFleetBtn">Наш флот</button>
+            <button class="btn-custom" id="ticketsBtn">Билеты</button>
         </div>
 
-        <!-- Раздел: Информация -->
         <section class="hidden-section" id="infoSection">
             <h2 class="section-title">О компании SolAvia</h2>
             <div class="info-card">
@@ -192,7 +187,6 @@
             </div>
         </section>
 
-        <!-- Раздел: Флот -->
         <section class="hidden-section" id="fleetSection">
             <h2 class="section-title">Воздушные суда SolAvia</h2>
             
@@ -240,6 +234,11 @@
                 }
             });
         }
+
+        // Обработчик для кнопки "Билеты"
+        document.getElementById('ticketsBtn').addEventListener('click', () => {
+            alert('Нет в продаже');
+        });
 
         setupToggle('toggleInfoBtn', 'infoSection');
         setupToggle('toggleFleetBtn', 'fleetSection');
